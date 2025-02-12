@@ -10,7 +10,6 @@ function App() {
   const [cart, setCart]= useState([]);//Inicializamos el carrito vacio y lo vamos a ir llenando o modificando con ciertos métodos array
 
   function addToCart(item){
-
     const itemExists = cart.findIndex(guitar => guitar.id === item.id)
     if(itemExists >= 0){ //Existe en el carrito
       const updatedCart = [...cart] //Copia del carrito con spread operator(...)
@@ -23,9 +22,17 @@ function App() {
     }
   }
 
+  function removeFromCart(id){
+    setCart(prevCart => prevCart.filter(guitar => guitar.id !== id))//Nos permite acceder al arreglo y tenemos acceso a array method
+    //Accedemos a cada guitar individualmente => filtra las guitarras cuyo Id sea diferente al que paso - returna un nuevo arreglo y lo setea en nuestra funct
+  }
+
   return (
     <>
-    <Header />
+    <Header 
+      cart={cart}
+      removeFromCart={removeFromCart}
+    />
 
     <main className="container-xl mt-5">
         <h2 className="text-center">Nuestra Colección</h2>
