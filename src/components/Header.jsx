@@ -1,5 +1,6 @@
 import { useMemo } from "react"
-export default function Header({cart, removeFromCart}){//Tomamos nuestro carrito de compras
+
+export default function Header({cart, removeFromCart, increaseQuantity, decrementQuantity, clearCart}){//Tomamos nuestro carrito de compras
 
     //State Derivado
     const isEmpty= useMemo(() => cart.length === 0, [cart]) //Derivado porque depende del state carrito
@@ -58,6 +59,7 @@ export default function Header({cart, removeFromCart}){//Tomamos nuestro carrito
                                             <button
                                                 type="button"
                                                 className="btn btn-dark"
+                                                onClick={() => decrementQuantity(guitar.id)}
                                             >
                                                 -
                                             </button>
@@ -65,6 +67,7 @@ export default function Header({cart, removeFromCart}){//Tomamos nuestro carrito
                                             <button
                                                 type="button"
                                                 className="btn btn-dark"
+                                                onClick={() => increaseQuantity(guitar.id)}
                                             >
                                                 +
                                             </button>
@@ -85,7 +88,12 @@ export default function Header({cart, removeFromCart}){//Tomamos nuestro carrito
                             </table>
                             
                             <p className="text-end">Total pagar: <span className="fw-bold">${cartTotal}</span></p>
-                            <button className="btn btn-dark w-100 mt-3 p-2">Vaciar Carrito</button>
+                            <button 
+                            className="btn btn-dark w-100 mt-3 p-2"
+                            onClick={clearCart}
+                            >
+                                Vaciar Carrito
+                                </button>
                             </>
                         )}
                             </div>
